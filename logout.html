@@ -1,0 +1,296 @@
+
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+
+    <title>Login</title>
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    
+    <meta name="description" content="Login Area">
+    <meta name="author" content="">
+
+  <!-- ==== Favicons ==== -->
+    <link rel="shortcut icon" href="favicon.png" type="image/x-icon">
+    <link rel="icon" href="favicon.png" type="image/x-icon">
+
+    <!-- ==== Google Font ==== -->
+    <link href='https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900%7CMontserrat:700' rel='stylesheet' type='text/css'>
+
+    <!-- ==== Font Awesome ==== -->
+    <link href="https://satguruenterprise.in/app_css/font-awesome.min.css" rel="stylesheet">
+    
+    <!-- ==== Bootstrap ==== -->
+    <link href=https://satguruenterprise.in/app_css/bootstrap.min.css rel="stylesheet">
+    
+    <!-- ==== jQuery UI ==== -->
+    <link href="https://satguruenterprise.in/app_css/jquery-ui.min.css" rel="stylesheet">
+
+    <!-- ==== Animate CSS Library ==== -->
+    <link href="https://satguruenterprise.in/https://satguruenterprise.in/app_css/animate.min.css" rel="stylesheet">
+
+    <!-- ==== Owl Carousel Plugin ==== -->
+    <link href="https://satguruenterprise.in/app_css/owl.carousel.css" rel="stylesheet">
+    
+    <!-- ==== Magnific Popup Plugin ==== -->
+    <link href="https://satguruenterprise.in/app_css/magnific-popup.css" rel="stylesheet" type='text/css'>
+    
+    <!-- ==== FakeLoader Plugin ==== -->
+    <link href="https://satguruenterprise.in/app_css/fakeLoader.css" rel="stylesheet" type='text/css'>
+    
+    <!-- ==== Main Stylesheet ==== -->
+    <link href="https://satguruenterprise.in/app_js/style.css" rel="stylesheet">
+    
+    <!-- ==== Responsive Stylesheet ==== -->
+    <link href="https://satguruenterprise.in/app_css/responsive-style.css" rel="stylesheet">
+    
+    <!-- ==== Theme Color Stylesheet ==== -->
+    <link href="https://satguruenterprise.in/app_css/colors/theme-color-1.css" rel="stylesheet" id="changeColorScheme">
+    
+    <!-- ==== Custom Stylesheet ==== -->
+    <link href="https://satguruenterprise.in/app_css/custom.css" rel="stylesheet">   
+    	<script type="text/javascript">
+   function getId(id) { 
+       return document.getElementById(id); 
+   } 
+   function validation() { 
+       getId("btnLogin").style.display="none"; 
+       getId("wait_tip").style.display=""; 
+       return true; 
+   } 
+</script>
+
+<style>
+body  {
+  background-image: url("images/a1topup_background.png");
+  background-color: #cccccc;
+}
+
+    /* CSS for the clock */
+        .clock {
+            font-size: 18px;
+            font-family: Arial, sans-serif;
+            color: #333;
+            text-align: center;
+        }
+        
+        /* CSS for the element in bottom left corner */
+        .element {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            padding: 10px; /* Optional, to add some spacing */
+            color: #fff;
+        }
+</style>
+</head>
+<body>
+        <div class="element">
+  <!-- <div class="clock" id="clock"></div>
+    <script>
+        // JavaScript for the clock
+        function updateClock() {
+            var now = new Date().toLocaleString("en-US", { timeZone: "Asia/Kolkata" }); // Set the time zone to India (Asia/Kolkata)
+            document.getElementById("clock").innerHTML = now;
+        }
+        setInterval(updateClock, 1000);
+    </script>
+      </div> -->
+    <!-- FakeLoader Start -->
+    <div id="fakeLoader"></div>
+    <!-- FakeLoader End -->
+    
+    <!-- Menu Area Start -->
+    
+   
+    <!-- Menu Area End -->
+
+
+  
+  
+    <!-- Page Title Area Start -->
+   
+    <!-- Page Title Area End -->
+    <div class="container">
+        <br />
+        
+        <br />
+        <br />
+        
+         <div class="col-md-6 col-md-offset-3 ">
+             
+        <div class="text-center">
+                        <a href=""><img src="https://digitalextand.online/wp-content/uploads/2024/07/Black_and_Blue_Initials_Creative_Logo__3_-removebg-preview-e1720194968340.png" class="rounded" width="auto" height="70"></a>
+                    </div>
+                    <br>
+         
+    <div class="panel">
+      <div class="panel-heading" style="background-color:#10394d; color:white;">Welcome to NexGen Tech Solutions Login Panel</div>
+      <div class="panel-body"><div class="row">
+                    <div class="form-group col-xs-12">
+        
+            <div data-form-validation="true">
+                <form novalidate="novalidate" action="/login.html" method="post" id="login_form" onsubmit="return validation();">
+                
+                <div>
+                   <div class='alert alert-danger' style='color:#F00;'>You have Successfully Logout from your acccount.</div>
+    
+                  </div>
+                <div class="form-group">
+                             <label for="loginEmail">Mobile Number *</label> <br />
+                        <input id="username" name="username" class="form-control" placeholder="Registered Mobile" type="text" value="">
+                        </div>
+                    <div class="form-group">
+                        <label for="loginPassword">Password *</label> <br />
+                        <input id="password" name="password" class="form-control" placeholder="Password" value="" type="password">
+                        </div>
+                    <div class="checkbox">
+    <label><input type="checkbox" name="remember_me"  >Remember</label>
+    </div>
+             <div style="padding-left:8px;">   <input type="submit" class="btn btn-success" value="Login" name="btnLogin" id="btnLogin" style="width:49%; font-weight:bold;"/><span id="wait_tip" style="display:none;"> Please wait...<img src="images/ajax-loader2.gif"
+           id="loading_img"/></span> <a href="forget" class="btn btn-warning" role="button" style="width:49%; font-weight:bold;">Reset Password</a>
+           <br />
+           </div>
+          
+                
+                </div>
+               
+          </form>
+
+            <form action="#" method="post" id="pass_form" style="display:none">
+                <input placeholder="Your email address" type="text">
+                                   
+                              </form>
+
+            <form action="#" method="post" id="reg_form" style="display:none">
+                
+                    <input placeholder="Username" type="text">
+                       <input placeholder="Password" type="text">
+                       <input placeholder="Your email address" type="text">
+                        
+            </form>
+            </div>
+        </div>
+    </div></div></div>
+    </div>
+    </div>
+    <!-- Login Area End -->
+
+   
+  
+    
+   
+
+      <!-- ==== jQuery Library ==== -->
+    <script src="https://satguruenterprise.in/app_js/jquery-3.1.0.min.js"></script>
+
+    <!-- ==== jQuery UI ==== -->
+    <script src="https://satguruenterprise.in/app_js/jquery-ui.min.js"></script>
+    
+    <!-- ==== jQuery UI Touch Punch Plugin ==== -->
+    <script src="https://satguruenterprise.in/app_js/jquery.ui.touch-punch.min.js"></script>
+
+    <!-- ==== Bootstrap ==== -->
+    <script src="https://satguruenterprise.in/app_js/bootstrap.min.js"></script>
+
+    <!-- ==== FakeLoader Plugin ==== -->
+    <script src="https://satguruenterprise.in/app_js/fakeLoader.min.js"></script>
+
+    <!-- ==== StickyJS Plugin ==== -->
+    <script src="https://satguruenterprise.in/app_js/jquery.sticky.js"></script>
+
+    <!-- ==== Owl Carousel Plugin ==== -->
+    <script src="https://satguruenterprise.in/app_js/owl.carousel.min.js"></script>
+    
+    <!-- ==== jQuery Tubuler Plugin ==== -->
+    <script src="https://satguruenterprise.in/app_js/jquery.tubular.1.0.js"></script>
+    
+    <!-- ==== Magnific Popup Plugin ==== -->
+    <script src="https://satguruenterprise.in/app_js/jquery.magnific-popup.min.js"></script>
+
+    <!-- ==== jQuery Validation Plugin ==== -->
+    <script src="https://satguruenterprise.in/app_js/jquery.validate.min.js"></script>
+
+    <!-- ==== Animate Scroll Plugin ==== -->
+    <script src="https://satguruenterprise.in/app_js/animatescroll.min.js"></script>
+
+    <!-- ==== jQuery Waypoints Plugin ==== -->
+    <script src="https://satguruenterprise.in/app_js/jquery.waypoints.min.js"></script>
+
+    <!-- ==== jQuery CounterUp Plugin ==== -->
+    <script src="https://satguruenterprise.in/app_js/jquery.counterup.min.js"></script>
+    
+    <!-- ==== jQuery CountDown Plugin ==== -->
+    <script src="https://satguruenterprise.in/app_js/jquery.countdown.min.js"></script>
+    
+    <!-- ==== RetinaJS ==== -->
+    <script src="https://satguruenterprise.in/app_js/retina.min.js"></script>
+
+    <!-- ==== Main JavaScript ==== -->
+    <script src="https://satguruenterprise.in/app_js/main.js"></script>    
+     <script>
+            $(document).ready(function(){
+
+                //* boxes animation
+                form_wrapper = $('.login_box');
+                function boxHeight() {
+                    form_wrapper.animate({ marginTop : ( - ( form_wrapper.height() / 2) - 24) },400);
+                };
+                form_wrapper.css({ marginTop : ( - ( form_wrapper.height() / 2) - 24) });
+                $('.linkform a,.link_reg a').on('click',function(e){
+                    var target  = $(this).attr('href'),
+                    target_height = $(target).actual('height');
+                    $(form_wrapper).css({
+                        'height'        : form_wrapper.height()
+                    });
+                    $(form_wrapper.find('form:visible')).fadeOut(400,function(){
+                        form_wrapper.stop().animate({
+                            height   : target_height,
+                            marginTop: ( - (target_height/2) - 24)
+                        },500,function(){
+                            $(target).fadeIn(400);
+                            $('.links_btm .linkform').toggle();
+                            $(form_wrapper).css({
+                                'height'        : ''
+                            });
+                        });
+                    });
+                    e.preventDefault();
+                });
+
+                //* validation
+                $('#login_form').validate({
+                    onkeyup: false,
+                    errorClass: 'error',
+                    validClass: 'valid',
+                    rules: {
+                        username: { required: true, minlength: 3 },
+                        password: { required: true, minlength: 3 }
+                    },
+                    highlight: function(element) {
+                        $(element).closest('div').addClass("f_error");
+                        setTimeout(function() {
+                            boxHeight()
+                        }, 200)
+                    },
+                    unhighlight: function(element) {
+                        $(element).closest('div').removeClass("f_error");
+                        setTimeout(function() {
+                            boxHeight()
+                        }, 200)
+                    },
+                    errorPlacement: function(error, element) {
+                        $(element).closest('div').append(error);
+                    }
+                });
+            });
+        </script>
+</body>
+</html>

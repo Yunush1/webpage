@@ -1,0 +1,419 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>API Registration</title>
+
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    
+    <meta name="description" content="Login Area">
+    <meta name="author" content="">
+
+  
+  <!-- ==== Favicons ==== -->
+    <link rel="shortcut icon" href="favicon.png" type="image/x-icon">
+    <link rel="icon" href="favicon.png" type="image/x-icon">
+
+    <!-- ==== Google Font ==== -->
+    <link href='https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900%7CMontserrat:700' rel='stylesheet' type='text/css'>
+
+    <!-- ==== Font Awesome ==== -->
+    <link href="https://satguruenterprise.in/app_css/font-awesome.min.css" rel="stylesheet">
+    
+    <!-- ==== Bootstrap ==== -->
+    <link href=https://satguruenterprise.in/app_css/bootstrap.min.css rel="stylesheet">
+    
+    <!-- ==== jQuery UI ==== -->
+    <link href="https://satguruenterprise.in/app_css/jquery-ui.min.css" rel="stylesheet">
+
+    <!-- ==== Animate CSS Library ==== -->
+    <link href="https://satguruenterprise.in/https://satguruenterprise.in/app_css/animate.min.css" rel="stylesheet">
+
+    <!-- ==== Owl Carousel Plugin ==== -->
+    <link href="https://satguruenterprise.in/app_css/owl.carousel.css" rel="stylesheet">
+    
+    <!-- ==== Magnific Popup Plugin ==== -->
+    <link href="https://satguruenterprise.in/app_css/magnific-popup.css" rel="stylesheet" type='text/css'>
+    
+    <!-- ==== FakeLoader Plugin ==== -->
+    <link href="https://satguruenterprise.in/app_css/fakeLoader.css" rel="stylesheet" type='text/css'>
+    
+    <!-- ==== Main Stylesheet ==== -->
+    <link href="https://satguruenterprise.in/app_js/style.css" rel="stylesheet">
+    
+    <!-- ==== Responsive Stylesheet ==== -->
+    <link href="https://satguruenterprise.in/app_css/responsive-style.css" rel="stylesheet">
+    
+    <!-- ==== Theme Color Stylesheet ==== -->
+    <link href="https://satguruenterprise.in/app_css/colors/theme-color-1.css" rel="stylesheet" id="changeColorScheme">
+    
+    <!-- ==== Custom Stylesheet ==== -->
+    <link href="https://satguruenterprise.in/app_css/custom.css" rel="stylesheet">   
+       
+    <script type="text/javascript" language="javascript">                   
+        function getCityName(urlToSend)
+    {
+        if(document.getElementById('ddlState').selectedIndex != 0)
+        {
+            document.getElementById('hidStateCode').value = $("#ddlState")[0].options[document.getElementById('ddlState').selectedIndex].getAttribute('code');                  
+        $.ajax({
+  type: "GET",
+  url: urlToSend+""+document.getElementById('ddlState').value,
+  success: function(html){
+    $("#ddlCity").html(html);
+  }
+});
+        }
+    }
+
+function getAreaName(urlToSend)
+    {
+        if(document.getElementById('ddlCity').selectedIndex != 0)
+        {
+        $.ajax({
+  type: "GET",
+  url: urlToSend+""+document.getElementById('ddlCity').value,
+  success: function(html){
+      var html = "<option value='0'>Select Area</option>"+html+"<option value='0'>Other</option>";
+    $("#ddlArea").html(html);
+  }
+});
+        }
+    }
+
+
+$(document).ready(function(){
+    //global vars
+    var form = $("#frmdistributer_form1");
+    var rname = $("#txtDistname");var postaladdr = $("#txtPostalAddr");
+    var pin = $("#txtPin");var mobileno = $("#txtMobNo");var emailid = $("#txtEmail");
+    var ddlsch = $("#ddlSchDesc");
+    //On Submitting
+    form.submit(function(){
+        if(validateRname() & validateAddress() & validatePin() & validateMobileno() & validateEmail() & validateScheme() & validateddlparent())
+            {               
+            return true;
+            }
+        else
+            return false;
+    });
+    //validation functions  
+    function validateddlparent()
+    {
+        var usertype = '';
+        if(usertype == "MasterDealer")
+        {
+            var index = document.getElementById("ddlDistname").selectedIndex;
+            if(index > 0)
+            {
+                return true;
+            }
+            else
+            {
+                alert("Please select Parent Distributor");
+                return false;
+            }
+            
+        }
+        if(usertype == "Distributor")
+        {
+            return true;
+            
+        }
+        return false;
+    }
+    function validateRname(){
+        if(rname.val() == ""){
+            rname.addClass("error");return false;
+        }
+        else{
+            rname.removeClass("error");return true;
+        }       
+    }   
+    function validateAddress(){
+        if(postaladdr.val() == ""){
+            postaladdr.addClass("error");return false;
+        }
+        else{
+            postaladdr.removeClass("error");return true;
+        }       
+    }
+    function validatePin(){
+        if(pin.val() == ""){
+            pin.addClass("error");
+            return false;
+        }
+        else{
+            pin.removeClass("error");
+            return true;
+        }
+        
+    }
+    function validateMobileno(){
+        if(mobileno.val().length < 10){
+            mobileno.addClass("error");return false;
+        }
+        else{
+            mobileno.removeClass("error");return true;
+        }
+    }
+    function validateEmail(){
+        var a = $("#txtEmail").val();
+        var filter = /^[a-zA-Z0-9]+[a-zA-Z0-9_.-]+[a-zA-Z0-9_-]+@[a-zA-Z0-9]+[a-zA-Z0-9.-]+[a-zA-Z0-9]+.[a-z]{2,4}$/;
+        if(filter.test(a)){
+            emailid.removeClass("error");
+            return true;
+        }
+        else{
+            emailid.addClass("error");          
+            return false;
+        }
+    }
+    function validateScheme(){
+        if(ddlsch[0].selectedIndex == 0){
+            ddlsch.addClass("error");           
+            return false;
+        }
+        else{
+            ddlsch.removeClass("error");        
+            return true;
+        }
+    }
+    
+    setTimeout(function(){$('div.message').fadeOut(1000);}, 10000);
+    
+});
+    function ChangeAmount()
+    {
+        if(document.getElementById('ddlSchDesc').selectedIndex != 0)
+        {
+            document.getElementById('spAmount').innerHTML = $("#ddlSchDesc")[0].options[document.getElementById('ddlSchDesc').selectedIndex].getAttribute("amount");
+            document.getElementById('hid_scheme_amount').value = document.getElementById('spAmount').innerHTML;
+        }
+    }   
+</script>
+    <script language="javascript">
+    function selectddlvalue()
+    {
+        var state_id = '';
+        var city_id = '';
+        var retailer_type_id = '';
+        var scheme_id = '';
+        var parent_id = '';
+        document.getElementById("ddlState").value = state_id;
+        
+        document.getElementById("ddlRetType").value = retailer_type_id;
+        document.getElementById("ddlSchDesc").value = scheme_id;
+        document.getElementById("ddlDistname").value = parent_id;
+        var urlToSend = 'https://satguruenterprise.in/local_area/getCity/';
+        $.ajax({
+  type: "GET",
+  url: urlToSend+""+document.getElementById('ddlState').value,
+  success: function(html){
+    $("#ddlCity").html(html);
+    document.getElementById("ddlCity").value = city_id;
+  }
+});
+
+    }
+    
+    </script>
+</head>
+
+<body onLoad="selectddlvalue()">
+
+<!-- agent menu -->
+             <div id="primaryMenu" class="alert">
+
+            
+                
+            
+        
+            <div class="container">
+                <b> Logged in as Admin ! </b> <a href="site_admin.html" class="btn btn-info" role="button">Back To Admin </a> 
+
+                
+            </div>
+        </div>
+<!-- end agent menu -->
+
+
+
+
+
+<!-- Distributor menu start -->
+<!-- Ditributor Menu end -->
+
+
+
+
+
+
+
+
+
+<!-- MD menu start -->
+<!-- MD Menu end -->
+
+
+ 
+
+
+<div class="container">
+
+
+<div class="panel panel-primary">
+      <div class="panel-heading">API Registraion Form</div>
+      <div class="panel-body">
+
+
+        <form method="post" action="reseller_registration" name="frmdistributer_form1" id="frmdistributer_form1" autocomplete="off">
+
+<div class="form-group">
+<label for="txtDistname">Name :</label>
+<input type="text" class="form-control" required="" title="Enter Agent Name." id="txtDistname" name="txtDistname" value=""  maxlength="100"/>
+</div>
+
+
+
+
+<div class="form-group">
+<label for="txtPostalAddr">Postal Address :</label>
+<textarea title="Enter Postal Address" id="txtPostalAddr" name="txtPostalAddr" class="form-control" required=""></textarea>
+</div>
+
+
+<div class="form-group">
+<label for="txtPin">Pin Code :</label>
+<input type="text" class="form-control" required="" id="txtPin" onKeyPress="return isNumeric(event);" name="txtPin" maxlength="8" title="Enter Pin Code." value=""/>
+</div>
+
+
+<div class="form-group">
+<label for="ddlState">State :</label>
+<input type="hidden" name="hidStateCode" id="hidStateCode" />
+<select class="form-control" required="" id="ddlState" name="ddlState" onChange="getCityName('https://satguruenterprise.in/local_area/getCity/')" title="Select State.<br />Click on drop down">
+<option value="0">Select State</option>
+<option code='AN ' value='10'>Andaman And Nicobar </option><option code='AP' value='11'>Andhra Pradesh</option><option code='AR' value='12'>Arunachal Pradesh</option><option code='AS' value='13'>Assam</option><option code='BR' value='14'>Bihar</option><option code='CH' value='15'>Chandigarh</option><option code='CH' value='48'>CHENNAI</option><option code='CT' value='16'>Chhattisgarh</option><option code='DN' value='17'>Dadra Nager Haveli</option><option code='DD' value='18'>Daman And Div</option><option code='DL' value='47'>Delhi</option><option code='GA' value='19'>Goa</option><option code='GJ' value='20'>Gujarat</option><option code='HR' value='21'>Haryana</option><option code='HP' value='22'>Himachal Pradesh</option><option code='JK' value='23'>Jammu And Kashmir</option><option code='JH' value='24'>Jharkhand</option><option code='KA' value='25'>Karnataka</option><option code='KL' value='26'>Kerala</option></select>
+</div>
+
+
+
+
+
+
+<div class="form-group">
+<label for="txtMobNo">Mobile No :</label>
+<input type="number" class="form-control" required="" onKeyPress="return isNumeric(event);" title="Enter Mobile No.<br />e.g. 9898980000" id="txtMobNo" name="txtMobNo" maxlength="10" value=""/>
+</div>
+
+
+
+
+
+
+
+
+
+
+<div class="form-group">
+<label for="txtEmail">Email :</label>
+<input type="email" class="form-control" required="" id="txtEmail" title="Enter Email ID.<br />e.g some@gmail.com" name="txtEmail"  maxlength="150" value=""/>
+</div>
+
+
+<div class="form-group">
+<label for="txtpanNo">Pan /GST/Adhaar Number:</label>
+<input type="text" name="txtpanNo" id="txtpanNo" class="form-control" value=""/>
+</div>
+
+
+<div class="form-group">
+<label for="txtConPer">Contact Person :</label>
+<input type="text" class="form-control" required="" id="txtConPer" title="Enter Contact No." name="txtConPer"  maxlength="150" value=""/>
+</div>
+
+
+
+ <div class="form-group">
+    <label for="ddlSchDesc">Select Scheme :</label>
+ <select required="" class="form-control" id="ddlSchDesc" onChange="ChangeAmount()" title="Select Scheme Name.<br />Click on drop down" name="ddlSchDesc">
+      <option>Select Scheme</option>
+      <option amount='0' value='28'>RETAILERS</option>      </select>
+</div>
+
+
+      <input type="hidden" id="hid_scheme_amount" name="hid_scheme_amount" />
+
+      
+      <input type="hidden"  id="txtWorLimit" name="txtWorLimit" maxlength="50" value="0"/>
+ 
+
+      <input type="submit"  class="btn btn-primary" id="btnSubmit" name="btnSubmit" value="Submit Details"/>
+      <input type="reset" class="btn btn-primary" id="bttnCancel" name="bttnCancel" value="Cancel"/>
+
+    </div>
+    </div>
+</div>
+
+        <!-- ==== jQuery Library ==== -->
+    <script src="https://satguruenterprise.in/app_js/jquery-3.1.0.min.js"></script>
+
+    <!-- ==== jQuery UI ==== -->
+    <script src="https://satguruenterprise.in/app_js/jquery-ui.min.js"></script>
+    
+    <!-- ==== jQuery UI Touch Punch Plugin ==== -->
+    <script src="https://satguruenterprise.in/app_js/jquery.ui.touch-punch.min.js"></script>
+
+    <!-- ==== Bootstrap ==== -->
+    <script src="https://satguruenterprise.in/app_js/bootstrap.min.js"></script>
+
+    <!-- ==== FakeLoader Plugin ==== -->
+    <script src="https://satguruenterprise.in/app_js/fakeLoader.min.js"></script>
+
+    <!-- ==== StickyJS Plugin ==== -->
+    <script src="https://satguruenterprise.in/app_js/jquery.sticky.js"></script>
+
+    <!-- ==== Owl Carousel Plugin ==== -->
+    <script src="https://satguruenterprise.in/app_js/owl.carousel.min.js"></script>
+    
+    <!-- ==== jQuery Tubuler Plugin ==== -->
+    <script src="https://satguruenterprise.in/app_js/jquery.tubular.1.0.js"></script>
+    
+    <!-- ==== Magnific Popup Plugin ==== -->
+    <script src="https://satguruenterprise.in/app_js/jquery.magnific-popup.min.js"></script>
+
+    <!-- ==== jQuery Validation Plugin ==== -->
+    <script src="https://satguruenterprise.in/app_js/jquery.validate.min.js"></script>
+
+    <!-- ==== Animate Scroll Plugin ==== -->
+    <script src="https://satguruenterprise.in/app_js/animatescroll.min.js"></script>
+
+    <!-- ==== jQuery Waypoints Plugin ==== -->
+    <script src="https://satguruenterprise.in/app_js/jquery.waypoints.min.js"></script>
+
+    <!-- ==== jQuery CounterUp Plugin ==== -->
+    <script src="https://satguruenterprise.in/app_js/jquery.counterup.min.js"></script>
+    
+    <!-- ==== jQuery CountDown Plugin ==== -->
+    <script src="https://satguruenterprise.in/app_js/jquery.countdown.min.js"></script>
+    
+    <!-- ==== RetinaJS ==== -->
+    <script src="https://satguruenterprise.in/app_js/retina.min.js"></script>
+
+    <!-- ==== Main JavaScript ==== -->
+    <script src="https://satguruenterprise.in/app_js/main.js"></script>   
+     <div id="copyright">
+        <div class="container">
+            <!-- Copyright Text Start -->
+            <p class="left">Copyright 2024 &copy; <a href="digitalextand.online" style="color:yellow">NexGen Tech Solutions</a>. All Rights Reserved.</p>
+            <!-- Copyright Text End -->
+          
+        </div>
+    </div> 
+
+  
+</body>
+</html>

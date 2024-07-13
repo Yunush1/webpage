@@ -1,0 +1,706 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Admin Distributor Registration Form</title>
+ <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    
+    <meta name="description" content="Login Area">
+    <meta name="author" content="">
+
+  
+  <!-- ==== Favicons ==== -->
+    <link rel="shortcut icon" href="favicon.png" type="image/x-icon">
+    <link rel="icon" href="favicon.png" type="image/x-icon">
+
+    <!-- ==== Google Font ==== -->
+    <link href='https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900%7CMontserrat:700' rel='stylesheet' type='text/css'>
+
+    <!-- ==== Font Awesome ==== -->
+    <link href="https://satguruenterprise.in/app_css/font-awesome.min.css" rel="stylesheet">
+    
+    <!-- ==== Bootstrap ==== -->
+    <link href=https://satguruenterprise.in/app_css/bootstrap.min.css rel="stylesheet">
+    
+    <!-- ==== jQuery UI ==== -->
+    <link href="https://satguruenterprise.in/app_css/jquery-ui.min.css" rel="stylesheet">
+
+    <!-- ==== Animate CSS Library ==== -->
+    <link href="https://satguruenterprise.in/https://satguruenterprise.in/app_css/animate.min.css" rel="stylesheet">
+
+    <!-- ==== Owl Carousel Plugin ==== -->
+    <link href="https://satguruenterprise.in/app_css/owl.carousel.css" rel="stylesheet">
+    
+    <!-- ==== Magnific Popup Plugin ==== -->
+    <link href="https://satguruenterprise.in/app_css/magnific-popup.css" rel="stylesheet" type='text/css'>
+    
+    <!-- ==== FakeLoader Plugin ==== -->
+    <link href="https://satguruenterprise.in/app_css/fakeLoader.css" rel="stylesheet" type='text/css'>
+    
+    <!-- ==== Main Stylesheet ==== -->
+    <link href="https://satguruenterprise.in/app_js/style.css" rel="stylesheet">
+    
+    <!-- ==== Responsive Stylesheet ==== -->
+    <link href="https://satguruenterprise.in/app_css/responsive-style.css" rel="stylesheet">
+    
+    <!-- ==== Theme Color Stylesheet ==== -->
+    <link href="https://satguruenterprise.in/app_css/colors/theme-color-1.css" rel="stylesheet" id="changeColorScheme">
+    
+    <!-- ==== Custom Stylesheet ==== -->
+    <link href="https://satguruenterprise.in/app_css/custom.css" rel="stylesheet">       
+    <script type="text/javascript" language="javascript">					
+		function getCityName(urlToSend)
+	{
+		if(document.getElementById('ddlState').selectedIndex != 0)
+		{
+			document.getElementById('hidStateCode').value = $("#ddlState")[0].options[document.getElementById('ddlState').selectedIndex].getAttribute('code');					
+		$.ajax({
+  type: "GET",
+  url: urlToSend+""+document.getElementById('ddlState').value,
+  success: function(html){
+    $("#ddlCity").html(html);
+  }
+});
+		}
+	}
+
+function getAreaName(urlToSend)
+	{
+		if(document.getElementById('ddlCity').selectedIndex != 0)
+		{
+		$.ajax({
+  type: "GET",
+  url: urlToSend+""+document.getElementById('ddlCity').value,
+  success: function(html){
+	  var html = "<option value='0'>Select Area</option>"+html+"<option value='0'>Other</option>";
+    $("#ddlArea").html(html);
+  }
+});
+		}
+	}
+
+
+$(document).ready(function(){
+	//global vars
+	var form = $("#frmdistributer_form1");
+	var dname = $("#txtDistname");var postaladdr = $("#txtPostalAddr");
+	var pin = $("#txtPin");var mobileno = $("#txtMobNo");var emailid = $("#txtEmail");
+	var ddlsch = $("#ddlSchDesc");var mdname = $("#ddlDistname");
+	//On Submitting
+	form.submit(function(){
+		if(validateDname() & validateAddress() & validatePin() & validateMobileno() & validateEmail() & validateScheme() & validateMDName())
+			{				
+			return true;
+			}
+		else
+			return false;
+	});
+	//validation functions	
+	function validateDname(){
+		if(dname.val() == ""){
+			dname.addClass("error");return false;
+		}
+		else{
+			dname.removeClass("error");return true;
+		}		
+	}	
+	function validateAddress(){
+		if(postaladdr.val() == ""){
+			postaladdr.addClass("error");return false;
+		}
+		else{
+			postaladdr.removeClass("error");return true;
+		}		
+	}
+	function validatePin(){
+		if(pin.val() == ""){
+			pin.addClass("error");
+			return false;
+		}
+		else{
+			pin.removeClass("error");
+			return true;
+		}
+		
+	}
+	function validateMobileno(){
+		if(mobileno.val().length < 10){
+			mobileno.addClass("error");return false;
+		}
+		else{
+			mobileno.removeClass("error");return true;
+		}
+	}
+	function validateEmail(){
+		var a = $("#txtEmail").val();
+		var filter = /^[a-zA-Z0-9]+[a-zA-Z0-9_.-]+[a-zA-Z0-9_-]+@[a-zA-Z0-9]+[a-zA-Z0-9.-]+[a-zA-Z0-9]+.[a-z]{2,4}$/;
+		if(filter.test(a)){
+			emailid.removeClass("error");
+			return true;
+		}
+		else{
+			emailid.addClass("error");			
+			return false;
+		}
+	}
+	function validateScheme(){
+		if(ddlsch[0].selectedIndex == 0){
+			ddlsch.addClass("error");			
+			return false;
+		}
+		else{
+			ddlsch.removeClass("error");		
+			return true;
+		}
+	}
+	function validateMDName(){
+		if(mdname[0].selectedIndex == 0){
+			mdname.addClass("error");			
+			return false;
+		}
+		else{
+			mdname.removeClass("error");		
+			return true;
+		}
+	}		
+	setTimeout(function(){$('div.message').fadeOut(1000);}, 10000);
+	
+});
+	function ChangeAmount()
+	{
+		if(document.getElementById('ddlSchDesc').selectedIndex != 0)
+		{
+			document.getElementById('spAmount').innerHTML = $("#ddlSchDesc")[0].options[document.getElementById('ddlSchDesc').selectedIndex].getAttribute("amount");
+			document.getElementById('hid_scheme_amount').value = document.getElementById('spAmount').innerHTML;
+		}
+	}	
+</script>
+	<script language="javascript">
+	function selectddlvalue()
+	{
+		var state_id = '';
+		var city_id = '';
+		var retailer_type_id = '';
+		var scheme_id = '';
+		var parent_id = '';
+		document.getElementById("ddlState").value = state_id;
+		
+		document.getElementById("ddlRetType").value = retailer_type_id;
+		document.getElementById("ddlSchDesc").value = scheme_id;
+		document.getElementById("ddlDistname").value = parent_id;
+		var urlToSend = 'https://satguruenterprise.in/local_area/getCity/';
+		$.ajax({
+  type: "GET",
+  url: urlToSend+""+document.getElementById('ddlState').value,
+  success: function(html){
+    $("#ddlCity").html(html);
+	document.getElementById("ddlCity").value = city_id;
+  }
+});
+
+	}
+	
+	</script>
+</head>
+
+<body onLoad="selectddlvalue()">
+
+		
+
+
+<div id="menu">
+        <!-- Promo Area End -->
+        <!-- Secondary Menu Start -->
+        <nav id="secondaryMenu" class="navbar" data-sticky="true">
+            <div class="container">
+                <div class="navbar-header">
+                    <!-- Logo Start -->
+                    <a href="" class="navbar-brand">
+                        <img src="https://digitalextand.online/wp-content/uploads/2024/07/Black_and_Blue_Initials_Creative_Logo__3_-removebg-preview-e1720194968340.png" alt="" width="auto" height="55" />
+                    </a>
+                    <!-- Logo End -->
+                </div>
+                
+                <!-- Off-Canvas Menu Toggle Button Start -->
+                <button class="btn menu-toggle-btn">
+                    <i class="fa fa-navicon"></i> Menu
+                </button>
+                <!-- Off-Canvas Menu Toggle Button End -->
+                
+                <!-- Secondary Menu Links Start -->
+                <div id="secondaryNavbar" class="navbar-right reset-padding hidden-sm hidden-xs">
+                    <ul class="secondary-menu-links nav navbar-nav">
+                        <li><a href=/site_admin.html>Dashboard</a></li>
+  
+  
+           
+  
+                         <li>
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Customers<span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                         <li><a href="#" data-toggle="modal" data-target="#register">Register</a></li> 
+                          <li><a href="#" data-toggle="modal" data-target="#manage">Manage</a></li> 
+                           <li><a href="#" data-toggle="modal" data-target="#add_bal">Balance Transfer</a></li> 
+                         
+                        </ul>
+  </li>
+  
+  <li>
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">API PANEL<span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                         <li><a href=/reseller_registration.html>REGISTER API</a></li>
+                                  <li><a href=/reseller_list.html>MANAGE API</a></li>
+                         
+                        </ul>
+  </li>
+  
+                    
+                       <li>
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Setting<span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                 <li><a href=/upload.html>Change Logo</a></li>
+                                  <li><a href=update_contact.html>Update Contact</a></li>
+                                
+                                <li><a href=/bank.html>Add Bank Name</a></li>
+                                <li><a href=/admin_bank_details.html>Add Bank Details</a></li>
+                               
+                               <li><a href=/change_password.html>Change Password</a></li>
+                                </li>
+                                
+                            </ul>
+                        </li>
+                        
+                       
+  
+                            <li>
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Report<span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li><a href=/list_recharge_pending.html>Pending Recharge</a></li>
+                                <li><a href=/list_recharge.html>Recharge history</a></li>
+                                
+                                
+                            </ul>
+                        </li>
+  
+  
+                       
+                         
+                       <li><a href=/logout.html>log Out</a></li>
+                       
+                    </ul>
+                </div>
+                <!-- Secondary Menu Links End -->
+            </div>
+        </nav>
+        <!-- Secondary Menu End -->
+        
+        <!-- Off-Canvas Menu Start -->
+        <div class="off-canvas-menu" style="background-color:#10394d">
+            <!-- Off-Canvas Menu Close Button Start -->
+            <button type="button" class="off-canvas-menu--close-btn"><i class="fa fa-close"></i></button>
+            <!-- Off-Canvas Menu Close Button End -->
+            
+            <!-- Off-Canvas Menu Logo Start -->
+            <div class="off-canvas-menu-logo" >
+                <a href="/site_admin.html">
+                    <img src="https://digitalextand.online/wp-content/uploads/2024/07/Black_and_Blue_Initials_Creative_Logo__3_-removebg-preview-e1720194968340.png" alt="/" class="img-responsive center-block" />
+                </a>
+            </div>
+            <!-- Off-Canvas Menu Logo End -->
+            
+            <!-- Off-Canvas Menu Links Start -->
+            <ul class="nav nav-pills nav-stacked">
+                <li class="active"><a href="/site_admin.html"><i class="fa fa-fw fa-home"></i> Home</a></li>
+               <li>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                        <i class="fa fa-fw fa-user"></i> Customers <span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu">
+                        
+                        <li><a href="#" data-toggle="modal" data-target="#register"><i class="fa fa-fw fa-users"></i>Register</a></li> 
+                          <li><a href="#" data-toggle="modal" data-target="#manage"><i class="fa fa-fw fa-users"></i>Manage</a></li> 
+                           <li><a href="#" data-toggle="modal" data-target="#add_bal"><i class="fa fa-fw fa-users"></i>Balance Transfer</a></li> 
+                        
+                    </ul>
+                </li>
+                
+                 <li>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                        <i class="fa fa-fw fa-user"></i>API PANEL <span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu">
+                        
+                        <li><a href=/reseller_registration.html data-toggle="modal"><i class="fa fa-fw fa-users"></i>REGISTER API</a></li> 
+                          <li><a href=/reseller_list.html data-toggle="modal"><i class="fa fa-fw fa-users"></i>MANAGE API</a></li> 
+                        
+                        
+                    </ul>
+                </li>
+  
+  
+  <li>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                        <i class="fa fa-fw fa-cog"></i> Settings <span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu">
+                        
+  
+                                 
+                                 <li><a href=/upload.html><i class="fa fa-fw fa-check"></i>Change Logo</a></li>
+                                  <li><a href=/update_contact.html><i class="fa fa-fw fa-check"></i>Update Contact</a></li>
+                        
+                                <li><a href=/bank.html><i class="fa fa-fw fa-check"></i>Add Bank Name</a></li>
+                                <li><a href=/admin_bank_details.html><i class="fa fa-fw fa-check"></i>Add Bank Details</a></li>
+                                
+                       
+                        
+                    </ul>
+                </li>
+  
+                 <li> 
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+  <i class="fa fa-fw fa-bar-chart"></i> Report <span class="caret"></span></a>
+  
+  <ul class="dropdown-menu">
+  <li><a href=/list_recharge_pending.html><i class="fa fa-fw fa-check"></i>Pending Recharge</a></li>
+                                <li><a href=https://satguruenterprise.in//list_recharge><i class="fa fa-fw fa-check"></i>Recharge history</a></li>
+                    
+  
+  </ul>
+  </li>
+                
+  
+  
+  <li> 
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+  <i class="fa fa-fw fa-support"></i> My Account <span class="caret"></span></a>
+  
+  <ul class="dropdown-menu">
+  <li><a href=/change_password.html><i class="fa fa-fw fa-lock"></i>Change Password</a></li>
+  
+  
+                                 
+  </ul>
+  </li>
+            
+  
+  
+  
+  
+  
+  
+            </ul>
+            <!-- Off-Canvas Menu Links End -->
+  
+            <a href=/logout.html class="btn btn-default login-button"><i class="fa fa-user"></i> Log Out</a>
+        </div>
+        
+        <div class="off-canvas-menu-overlay"></div>
+        <!-- Off-Canvas Menu End -->
+    </div>
+    <div id="fakeLoader"></div>
+  
+    <div id="pageTitle" style="background-color:#10394d" >
+        <div class="container">
+            <div class="row" >
+                <div class="col-md-5" >
+                    <div class="section-title" >
+                       <h2  style="padding-top:10px"> Hi, Admin</h2>
+  
+                    </div>
+                </div>
+                 <div class="col-md-3">
+                     
+                   
+                </div>
+              <div class="col-md-4">
+                    <ul class="breadcrumb">
+                        <li><span>API Bal :</span></li>
+                        
+                        <li class="active">
+  0.00
+  </li>
+  <br>
+  <li style="padding-top:5px;"><span>Utility Bal</span></li>
+                       <li class="active">
+                           0.00</li>
+                    </ul>
+  
+                   
+  
+                </div>
+            </div>
+        </div>
+    </div>
+  
+  <!--model-->
+  
+  <div class="modal fade" id="register" role="dialog">
+      <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title">Please Select Customer Type</h4>
+          </div>
+          <div class="modal-body">
+  
+  
+  
+                      <div class="form-group">
+                     <select class="form-control" onchange="this.options[this.selectedIndex].value && (window.location = this.options[this.selectedIndex].value);">
+      <option value="">Select...</option>
+      <option value=/admin_md_registration.html>Master Distributor</option>
+      <option value=/admin_d_registration.html>Distributor</option>
+      <option value=/admin_agent_registration.html>Retailer</option>
+     
+  </select>
+          </div>       
+        
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  
+  
+  
+    <div class="modal fade" id="manage" role="dialog">
+      <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title">Please Select Customer Type</h4>
+          </div>
+          <div class="modal-body">
+  
+  
+  
+                      <div class="form-group">
+                     <select class="form-control" onchange="this.options[this.selectedIndex].value && (window.location = this.options[this.selectedIndex].value);">
+      <option value="">Select...</option>
+      <option value=/md_dealer_list.html>Master Distributor</option>
+      <option value=/distributor_list.html>Distributor</option>
+      <option value=/agent_list.html>Retailer</option>
+    
+  </select>
+          </div>       
+        
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  
+  
+  
+  
+     <div class="modal fade" id="add_bal" role="dialog">
+      <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title">Please Select Customer Type</h4>
+          </div>
+          <div class="modal-body">
+  
+  
+  
+                      <div class="form-group">
+                     <select class="form-control" onchange="this.options[this.selectedIndex].value && (window.location = this.options[this.selectedIndex].value);">
+      <option value="">Select...</option>
+      <option value=/add_fund_md.html>Master Distributor</option>
+      <option value=/add_fund_distributor.html>Distributor</option>
+      <option value=/add_fund_retailer.html>Retailer</option>
+      
+  </select>
+          </div>       
+        
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  
+  
+      <br />
+  
+  
+  <style>
+  body  {
+    
+    background-color:#d9d5ff94;
+  }
+  </style>
+  
+  
+
+<div class="container">
+
+
+<div class="panel panel-primary">
+      <div class="panel-heading">Distributor Registration Form</div>
+      <div class="panel-body">
+
+        <form method="post" action="/admin_d_registration.html" name="frmdistributer_form1" id="frmdistributer_form1" autocomplete="off">
+
+
+<div class="form-group">
+<label for="txtDistname">Distributor Name :</label>
+<input type="text" class="form-control" required="" title="Enter Dealer Name." id="txtDistname" name="txtDistname" value=""  maxlength="100"/>
+</div>
+
+<div class="form-group">
+<label for="ddlDistname">Select Parent :</label>
+<select id="ddlDistname" name="ddlDistname" class="form-control" title="Select Dealer Name.">
+<option>--Select--</option>
+<option value='1459'>ADMIN[300003]</option></select>
+</div>
+
+<div class="form-group">
+<label for="txtPostalAddr">Postal Address :</label>
+<textarea title="Enter Postal Address" id="txtPostalAddr" name="txtPostalAddr" class="form-control" ></textarea>
+</div>
+
+
+<div class="form-group">
+<label for="txtPin">Pin Code :</label>
+<input type="text" class="form-control" id="txtPin" required="" onKeyPress="return isNumeric(event);" name="txtPin" maxlength="8" title="Enter Pin Code." value=""/>
+</div>
+
+
+<div class="form-group">
+<label for="ddlState">State :</label>
+<input type="hidden" name="hidStateCode" id="hidStateCode" />
+<select class="form-control" id="ddlState" name="ddlState" onChange="getCityName('https://satguruenterprise.in/local_area/getCity/')" title="Select State.<br />Click on drop down"><option value="0">Select State</option>
+<option code='AN ' value='10'>Andaman And Nicobar </option><option code='AP' value='11'>Andhra Pradesh</option><option code='AR' value='12'>Arunachal Pradesh</option><option code='AS' value='13'>Assam</option><option code='BR' value='14'>Bihar</option><option code='CH' value='15'>Chandigarh</option><option code='CH' value='48'>CHENNAI</option><option code='CT' value='16'>Chhattisgarh</option><option code='DN' value='17'>Dadra Nager Haveli</option><option code='DD' value='18'>Daman And Div</option><option code='DL' value='47'>Delhi</option><option code='GA' value='19'>Goa</option><option code='GJ' value='20'>Gujarat</option><option code='HR' value='21'>Haryana</option><option code='HP' value='22'>Himachal Pradesh</option><option code='JK' value='23'>Jammu And Kashmir</option><option code='JH' value='24'>Jharkhand</option></select>
+</div>
+
+
+<div class="form-group">
+<label for="ddlCity">City/District :</label>
+<select class="form-control" id="ddlCity" name="ddlCity" title="Select City.<br />Click on drop down">
+<option value="0">Select City</option>
+</select>
+</div>
+
+<div class="form-group">
+<label for="txtMobNo">Mobile No :</label>
+<input type="number" class="form-control" required="" onKeyPress="return isNumeric(event);" title="Enter Mobile No.<br />e.g. 9898980000" id="txtMobNo" name="txtMobNo" maxlength="10"  value=""/>
+</div>
+
+<div class="form-group">
+<label for="txtLandNo">Alternate Number :</label>
+<input type="text" class="form-control" id="txtLandNo" name="txtLandNo" onKeyPress="return isNumeric(event);" title="Enter Landline No.<br />e.g 07926453647" maxlength="11" value=""/>
+</div>
+
+<div class="form-group">
+<label for="ddlRetType">Business Type :</label>
+<select class="form-control" id="ddlRetType" name="ddlRetType" title="Select Retailer Type.<br />Click on drop down">
+<option>Select Retailer Type</option>
+<option value='3'>Book Stores</option><option value='11'>Cable & DTH</option><option value='5'>Cybercafe & Pco</option><option value='10'>Electronics & computer</option><option value='7'>Grossary and Modern Trade</option><option value='9'>Health& Beauty</option><option value='12'>Mobile & Spare store</option><option value='1'>Mobile Recharge Shop</option><option value='8'>Photo & video Studio</option></select>
+</div>
+
+
+<div class="form-group">
+<label for="txtEmail">Email :</label>
+<input type="email" class="form-control" id="txtEmail" title="Enter Email ID.<br />e.g some@gmail.com" name="txtEmail"  maxlength="150" value=""/>
+</div>
+
+<div class="form-group">
+<label for="txtpanNo">Pan No :</label>
+<input type="text" name="txtpanNo" id="txtpanNo" class="form-control" value=""/>
+</div>
+
+
+<div class="form-group">
+<label for="txtConPer">Contact Person :</label>
+<input type="text" class="form-control" id="txtConPer" title="Enter Contact No." name="txtConPer"  maxlength="150" value=""/>
+</div>
+
+
+
+    
+
+      <input type="hidden" id="hid_scheme_amount" name="hid_scheme_amount" />
+     
+<div class="form-group">
+      <label for="txtWorLimit">Opening Balance :</label>
+      <input type="text" title="Enter Opening Balance.<br />e.g 1500,2500" onKeyPress="return isNumeric(event);" class="form-control" id="txtWorLimit" name="txtWorLimit" maxlength="50" value=""/>
+
+</div>
+      <input type="submit" class="btn btn-primary" id="btnSubmit" name="btnSubmit" value="Submit Details"/>
+      <input type="reset" class="btn btn-primary" id="bttnCancel" name="bttnCancel" value="Cancel"/></td>
+   
+</form>
+
+ </div>
+    </div>
+</div>
+</div>
+        <!-- ==== jQuery Library ==== -->
+    <script src="https://satguruenterprise.in/app_js/jquery-3.1.0.min.js"></script>
+
+    <!-- ==== jQuery UI ==== -->
+    <script src="https://satguruenterprise.in/app_js/jquery-ui.min.js"></script>
+    
+    <!-- ==== jQuery UI Touch Punch Plugin ==== -->
+    <script src="https://satguruenterprise.in/app_js/jquery.ui.touch-punch.min.js"></script>
+
+    <!-- ==== Bootstrap ==== -->
+    <script src="https://satguruenterprise.in/app_js/bootstrap.min.js"></script>
+
+    <!-- ==== FakeLoader Plugin ==== -->
+    <script src="https://satguruenterprise.in/app_js/fakeLoader.min.js"></script>
+
+    <!-- ==== StickyJS Plugin ==== -->
+    <script src="https://satguruenterprise.in/app_js/jquery.sticky.js"></script>
+
+    <!-- ==== Owl Carousel Plugin ==== -->
+    <script src="https://satguruenterprise.in/app_js/owl.carousel.min.js"></script>
+    
+    <!-- ==== jQuery Tubuler Plugin ==== -->
+    <script src="https://satguruenterprise.in/app_js/jquery.tubular.1.0.js"></script>
+    
+    <!-- ==== Magnific Popup Plugin ==== -->
+    <script src="https://satguruenterprise.in/app_js/jquery.magnific-popup.min.js"></script>
+
+    <!-- ==== jQuery Validation Plugin ==== -->
+    <script src="https://satguruenterprise.in/app_js/jquery.validate.min.js"></script>
+
+    <!-- ==== Animate Scroll Plugin ==== -->
+    <script src="https://satguruenterprise.in/app_js/animatescroll.min.js"></script>
+
+    <!-- ==== jQuery Waypoints Plugin ==== -->
+    <script src="https://satguruenterprise.in/app_js/jquery.waypoints.min.js"></script>
+
+    <!-- ==== jQuery CounterUp Plugin ==== -->
+    <script src="https://satguruenterprise.in/app_js/jquery.counterup.min.js"></script>
+    
+    <!-- ==== jQuery CountDown Plugin ==== -->
+    <script src="https://satguruenterprise.in/app_js/jquery.countdown.min.js"></script>
+    
+    <!-- ==== RetinaJS ==== -->
+    <script src="https://satguruenterprise.in/app_js/retina.min.js"></script>
+
+    <!-- ==== Main JavaScript ==== -->
+    <script src="https://satguruenterprise.in/app_js/main.js"></script>   
+     <div id="copyright">
+        <div class="container">
+            <!-- Copyright Text Start -->
+            <p class="left">Copyright 2024 &copy; <a href="https://digitalextand.online/" style="color:yellow">NexGen Tech Solutions</a>. All Rights Reserved.</p>
+            <!-- Copyright Text End -->
+          
+        </div>
+    </div> 
+  
+</body>
+
+</html>
